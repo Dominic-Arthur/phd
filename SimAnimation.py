@@ -48,6 +48,7 @@ def plot_trans_tree_model():
         ax2 = fig.add_subplot(gs[:, 1])
         prob_node_colors = [node_colors_map.get(node, "black") for node in tree.nodes()]
 
+        # Determine layers based on distance from root using single-source shortest path
         layers = []
         distance_from_root = nx.single_source_shortest_path_length(tree, 0)
         max_distance = max(distance_from_root.values())
