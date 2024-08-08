@@ -6,7 +6,7 @@ import matplotlib.gridspec as grid
 import networkx as nx
 from Simulation import generate_transmission_tree, rng
 from SimAnalysis import get_mean_and_std, moment_estimate_k
-from networkx.drawing.nx_pydot import pydot_layout
+import matplotlib.patches as mpatches
 
 
 def plot_trans_tree_model():
@@ -48,7 +48,7 @@ def plot_trans_tree_model():
         ax2 = fig.add_subplot(gs[:, 1])
         prob_node_colors = [node_colors_map.get(node, "black") for node in tree.nodes()]
 
-        # Determine layers based on distance from root using single-source shortest path
+        # Determine layers based on distance from root using single-source the shortest path
         layers = []
         distance_from_root = nx.single_source_shortest_path_length(tree, 0)
         max_distance = max(distance_from_root.values())
@@ -64,6 +64,20 @@ def plot_trans_tree_model():
                 node_size=[120 if node == 0 else 20 for node in tree.nodes()], ax=ax2)
         ax2.set_title(f"Transmission Tree\nPriors ($R_0$:{r0}, $k$:{k})")
         ax2.axis("equal")
+
+        # Add a legend for the generation colors
+        legend_patches = []
+        for i, generation in enumerate(generations):
+            if i == 0:
+                color = "red"  # Red for the root node
+                label = f"Index (Gen {i})"
+            else:
+                color = cmap(i / len(generations))
+                label = f"Gene {i}"
+            legend_patches.append(mpatches.Patch(color=color, label=label))
+
+        ax2.legend(handles=legend_patches, title="Generations", loc="upper left", bbox_to_anchor=(1.05, 1),
+                   borderaxespad=0.)
 
         plt.tight_layout()
         st.pyplot(plt)
@@ -146,5 +160,5 @@ if __name__ == "__main__":
 
     st.divider()
 
-    st.header("Epidemiological Data 📊📊📊📊")
+    st.header("Epidemiological Data 📊📊📊📊📊")
     plot_epi_time_scales_model()
