@@ -76,8 +76,8 @@ def plot_trans_tree_model():
                 label = f"Gene {i}"
             legend_patches.append(mpatches.Patch(color=color, label=label))
 
-        ax2.legend(handles=legend_patches, title="Generations", loc="upper left", bbox_to_anchor=(1.05, 1),
-                   borderaxespad=0.)
+        ax2.legend(handles=legend_patches, title="Generations", loc="upper center",
+                   bbox_to_anchor=(0.5, -0.01), ncol=3, borderaxespad=0., frameon=False)
 
         plt.tight_layout()
         st.pyplot(plt)
