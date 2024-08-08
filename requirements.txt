@@ -11,4 +11,4 @@ scipy~=1.11.4
 igraph~=0.11.6
 tqdm~=4.66.1
 streamlit~=1.37.1
-pygraphviz
+pygraphviz~=1.9
