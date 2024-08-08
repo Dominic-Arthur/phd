@@ -48,8 +48,16 @@ def plot_trans_tree_model():
         ax2 = fig.add_subplot(gs[:, 1])
         prob_node_colors = [node_colors_map.get(node, "black") for node in tree.nodes()]
 
-        # Create a layout using pydot and convert to a format matplotlib can use
-        pos = pydot_layout(tree, prog="twopi")
+        layers = []
+        distance_from_root = nx.single_source_shortest_path_length(tree, 0)
+        max_distance = max(distance_from_root.values())
+
+        for i in range(max_distance + 1):
+            layer = [node for node, dist in distance_from_root.items() if dist == i]
+            if layer:
+                layers.append(layer)
+
+        pos = nx.shell_layout(tree, nlist=layers)
 
         nx.draw(tree, pos, with_labels=False, arrowsize=10, node_color=prob_node_colors,
                 node_size=[120 if node == 0 else 20 for node in tree.nodes()], ax=ax2)
