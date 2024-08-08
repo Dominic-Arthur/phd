@@ -6,10 +6,10 @@ import matplotlib.gridspec as grid
 import networkx as nx
 from Simulation import generate_transmission_tree, rng
 from SimAnalysis import get_mean_and_std, moment_estimate_k
+from networkx.drawing.nx_pydot import pydot_layout
 
 
 def plot_trans_tree_model():
-
     def update_plots(size_sse, r0, k, n_gene):
         tree, generations, offsprings = generate_transmission_tree(size_sse=size_sse, R0=r0,
                                                                    k=k, n_generations=n_gene)
@@ -47,7 +47,10 @@ def plot_trans_tree_model():
         # Transmission Tree
         ax2 = fig.add_subplot(gs[:, 1])
         prob_node_colors = [node_colors_map.get(node, "black") for node in tree.nodes()]
-        pos = nx.nx_agraph.graphviz_layout(tree, prog="twopi")
+
+        # Create a layout using pydot and convert to a format matplotlib can use
+        pos = pydot_layout(tree, prog="twopi")
+
         nx.draw(tree, pos, with_labels=False, arrowsize=10, node_color=prob_node_colors,
                 node_size=[120 if node == 0 else 20 for node in tree.nodes()], ax=ax2)
         ax2.set_title(f"Transmission Tree\nPriors ($R_0$:{r0}, $k$:{k})")
