@@ -124,7 +124,7 @@ def plot_trans_tree_model():
         for i, generation in enumerate(generations):
             if i == 0:
                 color = "red"  # Red for the root node
-                label = f"Index (Gen {i})"
+                label = f"Gen {i} (Index)"
             else:
                 color = cmap(i / len(generations))
                 label = f"Gene {i}"
