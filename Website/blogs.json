@@ -1,0 +1,20 @@
+{
+    "blogs": [
+        {
+            "title": "Exploring the Beauty of Nature",
+            "excerpt": "Discover the stunning landscapes and natural wonders in our latest journey.",
+            "body": "In this blog post, we explore the majestic mountains, serene lakes, and lush forests that make up the beautiful scenery of our world. Whether you're an avid hiker or just a nature lover, there's something in this post for everyone.",
+            "date": "August 8, 2024",
+            "image": "Photos/IMG_0701.JPG",
+            "tags": ["Politics", "Religion"]
+        },
+        {
+            "title": "Urban Exploration: The Hidden Gems of the City",
+            "excerpt": "Uncover the hidden gems of urban environments, from street art to unique architecture.",
+            "body": "Cities are often bustling with life, but they also hold secrets waiting to be discovered. In this post, we delve into the hidden corners of the city, exploring its vibrant street art, eclectic cafes, and historic landmarks.",
+            "date": "July 22, 2024",
+            "image": "Photos/IMG_0701.JPG",
+            "tags": ["Jesus", "Man"]
+        }
+    ]
+}

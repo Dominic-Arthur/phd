@@ -1,0 +1,24 @@
+{
+    "images": [
+        {
+            "path": "Photos/IMG_0701.JPG",
+            "caption": "This is the first image caption, which can be long and descriptive."
+        },
+        {
+            "path": "Photos/IMG_0701.JPG",
+            "caption": "This is the second image caption, providing details about the photo."
+        },
+        {
+            "path": "Photos/IMG_0701.JPG",
+            "caption": "This is the third image caption, with more information about the context."
+        },
+        {
+            "path":"Photos/IMG_0701.JPG",
+            "caption": "This is the fourth image caption, elaborating on the subject matter."
+        },
+        {
+            "path": "Photos/IMG_0701.JPG",
+            "caption": "This is the fifth image caption, describing what the image represents."
+        }
+    ]
+}
