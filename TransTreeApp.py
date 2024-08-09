@@ -29,7 +29,7 @@ def generate_transmission_tree(size_sse, R0, k, n_generations):
     offsprings = {0: set(sse_infectees)}
     current_infectors = sse_infectees
     susceptible = np.arange(size_sse + 1, 100_000)
-    generations = [current_infectors]
+    generations = [current_infectors + [0]]
     transmissions = [(0, ie) for ie in current_infectors]  # Initial number of people infected by superspreader 0
 
     for _ in range(n_generations):
@@ -83,8 +83,6 @@ def plot_trans_tree_model():
             for node in generation
         }
 
-        node_colors_map[0] = "red"
-
         fig = plt.figure(figsize=(12, 8))
         gs = grid.GridSpec(1, 2, width_ratios=[1, 3])
 
@@ -114,9 +112,7 @@ def plot_trans_tree_model():
             if layer:
                 layers.append(layer)
 
-        # pos = nx.shell_layout(tree, nlist=layers)
-
-        pos = nx.nx_agraph.graphviz_layout(tree, prog="twopi")
+        pos = nx.shell_layout(tree, nlist=layers)
 
         nx.draw(tree, pos, with_labels=False, arrowsize=10, node_color=prob_node_colors,
                 node_size=[120 if node == 0 else 20 for node in tree.nodes()], ax=ax2)
