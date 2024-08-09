@@ -1,23 +1,23 @@
 {
     "images": [
         {
-            "path": "https://github.com/Dominic-Arthur/phd/tree/main/Website/Photos/IMG_0701.JPG",
+            "path": "https://github.com/Dominic-Arthur/phd/tree/main/Website/Photos/IMG_0701.JPG/",
             "caption": "This is the first image caption, which can be long and descriptive."
         },
         {
-            "path": "https://github.com/Dominic-Arthur/phd/tree/main/Website/Photos/IMG_0701.JPG",
+            "path": "https://github.com/Dominic-Arthur/phd/tree/main/Website/Photos/IMG_0701.JPG/",
             "caption": "This is the second image caption, providing details about the photo."
         },
         {
-            "path": "https://github.com/Dominic-Arthur/phd/tree/main/Website/Photos/IMG_0701.JPG",
+            "path": "https://github.com/Dominic-Arthur/phd/tree/main/Website/Photos/IMG_0701.JPG/",
             "caption": "This is the third image caption, with more information about the context."
         },
         {
-            "path":"https://github.com/Dominic-Arthur/phd/tree/main/Website/Photos/IMG_0701.JPG",
+            "path":"https://github.com/Dominic-Arthur/phd/tree/main/Website/Photos/IMG_0701.JPG/",
             "caption": "This is the fourth image caption, elaborating on the subject matter."
         },
         {
-            "path": "https://github.com/Dominic-Arthur/phd/tree/main/Website/Photos/IMG_0701.JPG",
+            "path": "https://github.com/Dominic-Arthur/phd/tree/main/Website/Photos/IMG_0701.JPG/",
             "caption": "This is the fifth image caption, describing what the image represents."
         }
     ]
