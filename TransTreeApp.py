@@ -25,7 +25,7 @@ def get_mean_and_std(data):
 def generate_transmission_tree(size_sse, R0, k, n_generations):
     # Calculate the parameter for the negative binomial distribution
     p = k / (k + R0)
-    sse_infectees = np.arange(1, size_sse + 1)
+    sse_infectees = list(np.arange(1, size_sse + 1))
     offsprings = {0: set(sse_infectees)}
     current_infectors = sse_infectees
     susceptible = np.arange(size_sse + 1, 100_000)
