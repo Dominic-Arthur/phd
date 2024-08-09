@@ -2,92 +2,8 @@ import streamlit as st
 import numpy as np
 import seaborn as sns
 import matplotlib.pyplot as plt
-import matplotlib.gridspec as grid
-import networkx as nx
-from Simulation import generate_transmission_tree, rng
-from SimAnalysis import get_mean_and_std, moment_estimate_k
-import matplotlib.patches as mpatches
 
-
-def plot_trans_tree_model():
-    def update_plots(size_sse, r0, k, n_gene):
-        tree, generations, offsprings = generate_transmission_tree(size_sse=size_sse, R0=r0,
-                                                                   k=k, n_generations=n_gene)
-
-        sns.set_style("white")
-        custom_params = {"axes.spines.right": False, "axes.spines.top": False}
-        sns.set_theme(style="ticks", rc=custom_params)
-        sns.set_context("paper", font_scale=2)
-
-        cmap = plt.get_cmap("hsv")
-        # Create a mapping of nodes to colours, with the root node (0) set to red
-        node_colors_map = {
-            node: ("red" if node == 0 else cmap(i / len(generations)))
-            for i, generation in enumerate(generations)
-            for node in generation
-        }
-
-        node_colors_map[0] = "red"
-
-        fig = plt.figure(figsize=(12, 8))
-        gs = grid.GridSpec(1, 2, width_ratios=[1, 3])
-
-        # Offspring Distribution
-        ax1 = fig.add_subplot(gs[0, 0])
-        offsprings_dist = [len(infectees) for infector, infectees in offsprings.items()]
-        o_mean_std = get_mean_and_std(offsprings_dist)
-        k = moment_estimate_k(offsprings_dist)
-
-        ax1.hist(offsprings_dist, bins=range(0, max(offsprings_dist) + 1), density=True,
-                 color="gray", edgecolor="black")
-        ax1.set_title(f"Offspring Distribution\nPosteriors ($R_0$:{o_mean_std['mean']:.2f}, $k$:{k})")
-        ax1.set_xlabel("Offsprings")
-        ax1.set_ylabel("Probability")
-
-        # Transmission Tree
-        ax2 = fig.add_subplot(gs[:, 1])
-        prob_node_colors = [node_colors_map.get(node, "black") for node in tree.nodes()]
-
-        # Determine layers based on distance from root using single-source the shortest path
-        layers = []
-        distance_from_root = nx.single_source_shortest_path_length(tree, 0)
-        max_distance = max(distance_from_root.values())
-
-        for i in range(max_distance + 1):
-            layer = [node for node, dist in distance_from_root.items() if dist == i]
-            if layer:
-                layers.append(layer)
-
-        pos = nx.shell_layout(tree, nlist=layers)
-
-        nx.draw(tree, pos, with_labels=False, arrowsize=10, node_color=prob_node_colors,
-                node_size=[120 if node == 0 else 20 for node in tree.nodes()], ax=ax2)
-        ax2.set_title(f"Transmission Tree\nPriors ($R_0$:{r0}, $k$:{k})")
-        ax2.axis("equal")
-
-        # Add a legend for the generation colors
-        legend_patches = []
-        for i, generation in enumerate(generations):
-            if i == 0:
-                color = "red"  # Red for the root node
-                label = f"Index (Gen {i})"
-            else:
-                color = cmap(i / len(generations))
-                label = f"Gene {i}"
-            legend_patches.append(mpatches.Patch(color=color, label=label))
-
-        ax2.legend(handles=legend_patches, title="Generations", loc="upper center",
-                   bbox_to_anchor=(0.5, -0.01), ncol=3, borderaxespad=0., frameon=False)
-
-        plt.tight_layout()
-        st.pyplot(plt)
-
-    size_sse_values = st.sidebar.slider("Size of SSE", 10.0, 50.0, 30.0, 10.0)
-    r0_values = st.sidebar.slider("Basic Reproductive Number (R0)", 0.1, 3.0, 1.5, 0.1)
-    k_values = st.sidebar.slider("Overdispersion Parameter (K)", 0.1, 5.0, 0.5, 0.1)
-    n_generations = st.sidebar.slider("Number of Infection Generations", 1, 10, 5, 1)
-
-    update_plots(size_sse_values, r0_values, k_values, n_generations)
+rng = np.random.default_rng(12345)
 
 
 def plot_epi_time_scales_model(latent_period=4.0, incubation_period=5.0, betas=None, num_samples=1000):
@@ -154,11 +70,6 @@ if __name__ == "__main__":
     st.title("Modelling Epidemic Time Scale Dynamics of Symptomatic Infections")
     st.write(
         "Use the sliders in the sidebar to adjust the parameters and observe the changes in the epidemic dynamics.")
-
-    st.header("Transmission Tree 🌴🌴🌴🌴🌴")
-    plot_trans_tree_model()
-
-    st.divider()
 
     st.header("Epidemiological Data 📊📊📊📊📊")
     plot_epi_time_scales_model()
