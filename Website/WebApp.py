@@ -61,7 +61,7 @@ page = st.sidebar.radio("Go to", ["Gallery", "About", "Blog"])
 
 # Gallery Page
 if page == "Gallery":
-    images_data = load_json_data("https://github.com/Dominic-Arthur/phd/blob/main/Website/images.json/", "images")
+    images_data = load_json_data("images.json", "images")
     st.title("Welcome to the Gallery")
     display_images(images_data, num_columns=2)
 
@@ -79,7 +79,7 @@ elif page == "About":
 # Blog Page
 elif page == "Blog":
     # Load blog data
-    blog_data = load_json_data("https://github.com/Dominic-Arthur/phd/blob/main/Website/blogs.json/", "blogs")
+    blog_data = load_json_data("blogs.json", "blogs")
 
     # Blog Page
     st.title("Blog")
