@@ -79,7 +79,7 @@ elif page == "About":
 # Blog Page
 elif page == "Blog":
     # Load blog data
-    blog_data = load_json_data("blogs.json", "blogs")
+    blog_data = load_json_data("/mount/src/phd/Website/blogs.json", "blogs")
 
     # Blog Page
     st.title("Blog")
