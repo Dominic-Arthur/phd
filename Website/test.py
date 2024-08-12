@@ -1,5 +1,10 @@
 import streamlit as st
 from pathlib import Path
+import os
+
+os.getcwd()
+
+st.write(os.getcwd())
 
 photo = Path(__file__).parents[1] / "IMG_0701.JPG"
 
