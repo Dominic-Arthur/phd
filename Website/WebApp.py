@@ -69,11 +69,7 @@ if page == "Gallery":
 elif page == "About":
     st.title("About Me")
     st.write("""
-    Welcome to the About page.
-
-    I'm [Your Name], a passionate photographer based in [Location].
-
-    I specialise in [Type of Photography], and my work is inspired by [Your Inspirations]. 
+    Welcome to the About page. 
     """)
 
 # Blog Page
