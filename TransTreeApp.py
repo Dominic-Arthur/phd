@@ -4,7 +4,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.gridspec as grid
 import networkx as nx
-import matplotlib.patches as mpatches
+import matplotlib.patches as patches
 
 rng = np.random.default_rng(12345)
 
@@ -128,7 +128,7 @@ def plot_trans_tree_model():
             else:
                 color = cmap(i / len(generations))
                 label = f"Gene {i}"
-            legend_patches.append(mpatches.Patch(color=color, label=label))
+            legend_patches.append(patches.Patch(color=color, label=label))
 
         ax2.legend(handles=legend_patches, title="Generations", loc="upper center",
                    bbox_to_anchor=(0.5, -0.01), ncol=3, borderaxespad=0., frameon=False)
